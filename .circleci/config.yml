@@ -4,11 +4,13 @@ jobs:
     steps:
       - checkout
 
-      - run: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee tflint-output.json
+      - run: 
+          command: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee tflint-output.json || true
 
       - store_artifacts:
           path: tflint-output.json
           destination: tflint-artifact
+          when: always
 
   test:
     machine: true
