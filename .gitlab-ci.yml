@@ -3,7 +3,7 @@ image: docker:latest
 services:
   - docker:dind
 stages:
-  - build
+  - terrascan
   - test
   - release
   - preprod
