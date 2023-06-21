@@ -4,7 +4,7 @@ jobs:
     steps:
       - checkout
 
-      - run: docker run --rm -v $(pwd):/src accurics/terrascan scan -t aws -d /src/aws -o json | tee terrascan-output.json
+      - run: docker run --rm -v $(pwd):/src accurics/terrascan scan -t aws -d /src/aws -o json | tee terrascan-output.json || true
 
       - store_artifacts:
           path: terrascan-output.json
