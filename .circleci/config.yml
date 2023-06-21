@@ -4,7 +4,8 @@ jobs:
     steps:
       - checkout
 
-      - run: docker run --rm -v $(pwd):/src aquasec/tfsec /src -f json | tee tfsec-output.json || true
+      - run:
+          command: docker run --rm -v $(pwd):/src aquasec/tfsec /src -f json | tee tfsec-output.json || true
 
       - store_artifacts:
           path: tfsec-output.json
@@ -25,6 +26,7 @@ jobs:
           command: |
             echo "This is an integration step"
             exit 1
+          when: on_fail         # Even if the job fails, continue to the next stages
 
   prod:
     machine: true
