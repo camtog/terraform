@@ -6,21 +6,11 @@ on:
       - main
 
 jobs:
-  terrascan:
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-20.04                    # similar to "image" in GitLab
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - run: echo "This is a build step"
 
-      - name: Run Terrascan
-        id: terrascan
-        uses: accurics/terrascan-action@v1
-        with:
-          iac_type: 'terraform'
-          iac_version: 'v14'
-          policy_type: 'aws'
-          only_warn: true
-          iac_dir: 'aws'
   test:
     runs-on: ubuntu-20.04
     needs: build
